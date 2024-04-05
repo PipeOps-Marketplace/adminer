@@ -96,3 +96,36 @@ return new AdminerLoginServers(
 
 
 To load a custom plugin you can add PHP scripts that return the instance of the plugin object to /var/www/html/plugins-enabled/.
+
+
+# Choosing a design
+
+The image bundles all the designs that are available in the source package of adminer. You can find the list of designs on GitHub: https://github.com/vrana/adminer/tree/master/designs.
+
+To use a bundled design you can pass its name in ADMINER_DESIGN:
+
+     $ docker run --link some_database:db -p 8080:8080 -e ADMINER_DESIGN='nette' adminer
+
+To use a custom design you can add a file called /var/www/html/adminer.css.
+Usage with external server
+
+You can specify the default host with the ADMINER_DEFAULT_SERVER environment variable. This is useful if you are connecting to an external server or a docker container named something other than the default db.
+
+     docker run -p 8080:8080 -e ADMINER_DEFAULT_SERVER=mysql adminer
+
+# Supported Drivers
+
+While Adminer supports a wide range of database drivers this image only supports the following out of the box:
+
+    MySQL
+    PostgreSQL
+    SQLite
+    SimpleDB
+    Elasticsearch
+
+To add support for the other drivers you will need to install the following PHP extensions on top of this image:
+
+    pdo_dblib (MS SQL)
+    oci8 (Oracle)
+    interbase (Firebird)
+    mongodb (MongoDB)
